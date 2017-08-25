@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  name: docker_systemd_service
+  author: Manuel Hutter
+  description: Create Systemd services for docker containers.
+  license: MIT
+
+  min_ansible_version: 2.0
+
+  galaxy_tags:
+    - system
+    - systemd
+    - server
+    - docker
+
+dependencies: []

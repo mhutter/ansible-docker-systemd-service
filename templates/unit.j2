@@ -1,0 +1,18 @@
+[Unit]
+After=docker.service
+PartOf=docker.service
+Requires=docker.service
+
+[Service]
+{% if env is defined %}
+EnvironmentFile={{ sysconf_dir }}/{{ name }}
+{% endif %}
+ExecStartPre=-/usr/bin/docker rm -f {{ name }}
+ExecStart=/usr/bin/docker run --name {{ name }} --rm {% if env is defined %}--env-file {{ sysconf_dir }}/{{ name }}{% endif %} {{ (args | trim) if args is defined }} {{ image }}
+ExecStop=/usr/bin/docker stop {{ name }}
+
+SyslogIdentifier={{ name }}
+Restart=always
+
+[Install]
+WantedBy=docker.service
