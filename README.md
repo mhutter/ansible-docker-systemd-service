@@ -1,4 +1,4 @@
-# mhutter.docker_service
+# Docker role `mhutter.docker-systemd-service`
 
 Generic role for creating systemd services to manage docker containers.
 
@@ -7,7 +7,7 @@ Generic role for creating systemd services to manage docker containers.
 ```yaml
 - name: Start WebApp
   include_role:
-    name: docker_service
+    name: docker-systemd-service
   vars:
     name: myapp
     image: myapp:latest
@@ -39,7 +39,7 @@ This will create:
 Put this in your `requirements.yml`:
 
 ```yml
-- role: mhutter.docker_systemd_service
+- role: mhutter.docker-systemd-service
 ```
 
 and run `ansible-galaxy install -r requirements.yml
