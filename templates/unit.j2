@@ -1,3 +1,7 @@
+# {{ ansible_managed }}
+{% macro params(name, vals) %}
+{% for v in vals %}-{{ name }} {{ v }} {% endfor %}
+{% endmacro %}
 [Unit]
 After=docker.service
 PartOf=docker.service
@@ -8,7 +12,7 @@ Requires=docker.service
 EnvironmentFile={{ sysconf_dir }}/{{ name }}
 {% endif %}
 ExecStartPre=-/usr/bin/docker rm -f {{ name }}
-ExecStart=/usr/bin/docker run --name {{ name }} --rm {% if env is defined %}--env-file {{ sysconf_dir }}/{{ name }}{% endif %} {{ (args | trim) if args is defined }} {{ image }}
+ExecStart=/usr/bin/docker run --name {{ name }} --rm {% if env is defined %}--env-file {{ sysconf_dir }}/{{ name }} {% endif %}{{ params('v', volumes) }}{{ params('p', ports) }}{{ params('l', labels) }}{{ args | default('') |trim }} {{ image }} {{ cmd | default('') | trim }}
 ExecStop=/usr/bin/docker stop {{ name }}
 
 SyslogIdentifier={{ name }}

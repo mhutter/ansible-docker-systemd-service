@@ -1,4 +1,7 @@
 ---
+volumes: []
+labels: []
+ports: []
 enabled: yes
 masked: no
 state: started

@@ -20,16 +20,28 @@ Generic role for creating systemd services to manage docker containers.
 ```
 
 This will create:
-- a file containing the env vars (either `/etc/sysconfig/mysql` or `/etc/default/mysql`)
-- a systemd unit which starts and stops the container
+
+* A file containing the env vars (either `/etc/sysconfig/mysql` or `/etc/default/mysql`).
+* A systemd unit which starts and stops the container. The unit will be called
+  `<name>_container.service` to avoid name clashes.
 
 ### Role variables
 
 * `name` (**required**) - name of the service
+
+#### Docker container specifics
+
 * `image` (**required**) - Docker image the service uses
-* `args` - arbitrary list of arguments to the `docker run` command; Put port
-  bindings, mounts etc here
+* `args` - arbitrary list of arguments to the `docker run` command
+* `cmd` - optional command to the container run command (the part after the
+  image name)
 * `env` - key/value pairs of ENV vars that need to be present
+* `volumes` (default: _[]_) - List of `-v` arguments
+* `ports` (default: _[]_) - List of `-p` arguments
+* `labels` (default: _[]_) - List of `-l` arguments
+
+#### Systemd service specifics
+
 * `enabled` (default: _yes_) - whether the service should be enabled
 * `masked` (default: _no_) - whether the service should be masked
 * `state` (default: _started_) - state the service should be in
