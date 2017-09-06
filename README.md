@@ -38,13 +38,15 @@ This will create:
 * `env` - key/value pairs of ENV vars that need to be present
 * `volumes` (default: _[]_) - List of `-v` arguments
 * `ports` (default: _[]_) - List of `-p` arguments
+* `link` (default: _[]_) - List of `--link` arguments
 * `labels` (default: _[]_) - List of `-l` arguments
 
 #### Systemd service specifics
 
 * `enabled` (default: _yes_) - whether the service should be enabled
 * `masked` (default: _no_) - whether the service should be masked
-* `state` (default: _started_) - state the service should be in
+* `state` (default: _started_) - state the service should be in - set to
+  `absent` to remove the service.
 
 ## Installation
 
@@ -54,7 +56,13 @@ Put this in your `requirements.yml`:
 - role: mhutter.docker-systemd-service
 ```
 
-and run `ansible-galaxy install -r requirements.yml
+and run `ansible-galaxy install -r requirements.yml`.
+
+
+## Gotchas
+
+* When the unit or env file is changed, systemd gets reloaded but existing
+  containers are NOT restarted.
 
 ## About orchestrating Docker containers using systemd.
 
