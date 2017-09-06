@@ -3,32 +3,7 @@
   include_vars: "{{ ansible_os_family }}.yml"
   tags: always
 
-- name: create ENV file for {{ name }}_container.service
-  template:
-    src: env.j2
-    dest: "{{ sysconf_dir }}/{{ name }}"
-    owner: root
-    group: root
-    mode: '0600'
-  when: env is defined
-
-# use `command` instead of `docker_image` so we don't have to install docker-py
-- name: pull image {{ image }}
-  command: docker pull {{ image }}
-
-# TODO: Add handler to restart service after new image has been pulled
-- name: create unit {{ name }}_container.service
-  template:
-    src: unit.j2
-    dest: /etc/systemd/system/{{ name }}_container.service
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: enable and start {{ name }}
-  systemd:
-    name: '{{ name }}_container.service'
-    daemon_reload: true
-    enabled: "{{ enabled }}"
-    masked: "{{ masked }}"
-    state: "{{ state }}"
+- include: install.yml
+  when: state != "absent"
+- include: uninstall.yml
+  when: state == "absent"
