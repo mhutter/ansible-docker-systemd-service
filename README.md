@@ -40,6 +40,7 @@ This will create:
 * `ports` (default: _[]_) - List of `-p` arguments
 * `link` (default: _[]_) - List of `--link` arguments
 * `labels` (default: _[]_) - List of `-l` arguments
+* `docker_pull` (default: _yes_) - whether the docker image should be pulled
 
 #### Systemd service specifics
 

@@ -11,6 +11,7 @@
 # use `command` instead of `docker_image` so we don't have to install docker-py
 - name: Pull image {{ image }}
   command: docker pull {{ image }}
+  when: docker_pull
 
 # TODO: Add handler to restart service after new image has been pulled
 - name: Create unit {{ name }}_container.service

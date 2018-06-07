@@ -6,3 +6,4 @@ links: []
 enabled: yes
 masked: no
 state: started
+docker_pull: yes
