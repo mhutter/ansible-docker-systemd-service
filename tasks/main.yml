@@ -4,6 +4,6 @@
   tags: always
 
 - include: install.yml
-  when: state != "absent"
+  when: service_state != "absent"
 - include: uninstall.yml
-  when: state == "absent"
+  when: service_state == "absent"
