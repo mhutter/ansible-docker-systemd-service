@@ -10,12 +10,13 @@ Generic role for creating systemd services to manage docker containers.
     name: docker-systemd-service
   vars:
     name: myapp
-    image: myapp:latest
-    args: >
-      --link mysql
-      -v /data/uploads:/data/uploads
-      -p 3000:3000
-    env:
+    container_image: myapp:latest
+    container_links: [ 'mysql' ]
+    container_volumes:
+      - '/data/uploads:/data/uploads'
+    container_ports:
+      - '3000:3000'
+    container_env:
       MYSQL_ROOT_PASSWORD: "{{ mysql_root_pw }}"
 ```
 
@@ -27,20 +28,20 @@ This will create:
 
 ### Role variables
 
-* `name` (**required**) - name of the service
+* `name` (**required**) - name of the container
 
 #### Docker container specifics
 
-* `image` (**required**) - Docker image the service uses
-* `args` - arbitrary list of arguments to the `docker run` command
-* `cmd` - optional command to the container run command (the part after the
+* `container_image` (**required**) - Docker image the service uses
+* `container_args` - arbitrary list of arguments to the `docker run` command
+* `container_cmd` - optional command to the container run command (the part after the
   image name)
-* `env` - key/value pairs of ENV vars that need to be present
-* `volumes` (default: _[]_) - List of `-v` arguments
-* `ports` (default: _[]_) - List of `-p` arguments
-* `link` (default: _[]_) - List of `--link` arguments
-* `labels` (default: _[]_) - List of `-l` arguments
-* `docker_pull` (default: _yes_) - whether the docker image should be pulled
+* `container_env` - key/value pairs of ENV vars that need to be present
+* `container_volumes` (default: _[]_) - List of `-v` arguments
+* `container_ports` (default: _[]_) - List of `-p` arguments
+* `container_link` (default: _[]_) - List of `--link` arguments
+* `container_labels` (default: _[]_) - List of `-l` arguments
+* `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
 
 #### Systemd service specifics
 
@@ -64,6 +65,9 @@ and run `ansible-galaxy install -r requirements.yml`.
 
 * When the unit or env file is changed, systemd gets reloaded but existing
   containers are NOT restarted.
+* Make sure to quote values for `container_ports`, `container_volumes` and so
+  on, especially if they contain colons (`:`). Otherwise YAML will interpret
+  them as hashes/maps and ansible will throw up.
 
 ## About orchestrating Docker containers using systemd.
 

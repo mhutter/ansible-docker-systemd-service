@@ -8,11 +8,11 @@ PartOf=docker.service
 Requires=docker.service
 
 [Service]
-{% if env is defined %}
+{% if container_env is defined %}
 EnvironmentFile={{ sysconf_dir }}/{{ name }}
 {% endif %}
 ExecStartPre=-/usr/bin/docker rm -f {{ name }}
-ExecStart=/usr/bin/docker run --name {{ name }} --rm {% if env is defined %}--env-file {{ sysconf_dir }}/{{ name }} {% endif %}{{ params('v', volumes) }}{{ params('p', ports) }}{{ params('-link', links) }}{{ params('l', labels) }}{{ args | default('') |trim }} {{ image }} {{ cmd | default('') | trim }}
+ExecStart=/usr/bin/docker run --name {{ name }} --rm {% if container_env is defined %}--env-file {{ sysconf_dir }}/{{ name }} {% endif %}{{ params('v', container_volumes) }}{{ params('p', container_ports) }}{{ params('-link', container_links) }}{{ params('l', container_labels) }}{{ container_args | default('') |trim }} {{ container_image }} {{ container_cmd | default('') | trim }}
 ExecStop=/usr/bin/docker stop {{ name }}
 
 SyslogIdentifier={{ name }}
