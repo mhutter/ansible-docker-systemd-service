@@ -26,6 +26,6 @@
   systemd:
     name: '{{ name }}_container.service'
     daemon_reload: true
-    enabled: "{{ container_enabled }}"
-    masked: "{{ container_masked }}"
-    state: "{{ container_state }}"
+    enabled: "{{ service_enabled }}"
+    masked: "{{ service_masked }}"
+    state: "{{ service_state }}"
