@@ -1,4 +1,5 @@
 ---
+container_name: mycontainer
 container_docker_pull: yes
 container_labels: []
 container_links: []
