@@ -1,4 +1,5 @@
 # Docker role `mhutter.docker-systemd-service`
+[![Build Status](https://travis-ci.com/mhutter/ansible-docker-systemd-service.svg?branch=master)](https://travis-ci.com/mhutter/ansible-docker-systemd-service)
 
 Generic role for creating systemd services to manage docker containers.
 

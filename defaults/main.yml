@@ -1,9 +1,9 @@
 ---
-container_docker_pull: yes
+container_docker_pull: true
 container_labels: []
 container_links: []
 container_ports: []
 container_volumes: []
-service_enabled: yes
-service_masked: no
+service_enabled: true
+service_masked: false
 service_state: started
