@@ -1,5 +1,5 @@
 ---
-container_name: mycontainer
+container_name: "{{ name }}"
 container_docker_pull: yes
 container_labels: []
 container_links: []
