@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+    - include_role:
+        name: ansible-docker-systemd-service
+      vars:
+        name: myapp
+        container_image: myapp:latest
+        container_links:
+          - 'mysql'
+        container_volumes:
+          - '/data/uploads:/data/uploads'
+        container_ports:
+          - '3000:3000'
+        container_env:
+          MYSQL_ROOT_PASSWORD: "very sekr1t"

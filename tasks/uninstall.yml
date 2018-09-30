@@ -7,7 +7,7 @@
 - name: Disable and stop {{ name }}
   systemd:
     name: '{{ name }}_container.service'
-    enabled: False
+    enabled: false
     state: stopped
 
 - name: Remove unit {{ name }}_container.service
@@ -17,5 +17,4 @@
 
 - name: Reload systemd units
   command: systemctl daemon-reload
-  changed_when: False
-
+  changed_when: false
