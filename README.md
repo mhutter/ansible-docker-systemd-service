@@ -8,9 +8,9 @@ Generic role for creating systemd services to manage docker containers.
 ```yaml
 - name: Start WebApp
   include_role:
-    name: docker-systemd-service
+    name: mhutter.docker-systemd-service
   vars:
-    name: myapp
+    container_name: myapp
     container_image: myapp:latest
     container_links: [ 'mysql' ]
     container_volumes:
@@ -19,6 +19,8 @@ Generic role for creating systemd services to manage docker containers.
       - '3000:3000'
     container_env:
       MYSQL_ROOT_PASSWORD: "{{ mysql_root_pw }}"
+    container_labels:
+      - 'traefik.enable=true'
 ```
 
 This will create:
@@ -29,7 +31,7 @@ This will create:
 
 ### Role variables
 
-* `name` (**required**) - name of the container
+* `container_name` (**required**) - name of the container
 
 #### Docker container specifics
 
