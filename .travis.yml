@@ -1,0 +1,20 @@
+---
+language: python
+python:
+  - "2.7"
+  - "3.6"
+cache: pip
+
+install:
+  # Install ansible
+  - pip install ansible yamllint
+  # Create ansible.cfg with correct roles_path
+  - printf '[defaults]\nroles_path=../' > ansible.cfg
+
+script:
+  - yamllint --strict .
+  # Basic role syntax check
+  - ansible-playbook tests/ci.yml -i tests/inventory --syntax-check
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
