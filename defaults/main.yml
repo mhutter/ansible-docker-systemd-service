@@ -1,4 +1,5 @@
 ---
+container_name: "{{ name }}"
 container_docker_pull: true
 container_labels: []
 container_links: []
