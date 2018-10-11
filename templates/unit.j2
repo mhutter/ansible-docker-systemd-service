@@ -17,6 +17,7 @@ ExecStop=/usr/bin/docker stop {{ container_name }}
 
 SyslogIdentifier={{ container_name }}
 Restart=always
+RestartSec=10s
 
 [Install]
 WantedBy=docker.service
