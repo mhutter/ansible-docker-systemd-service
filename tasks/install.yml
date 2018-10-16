@@ -7,6 +7,7 @@
     group: root
     mode: '0600'
   when: container_env is defined
+  notify: restart container {{ container_name }}
 
 # use `command` instead of `docker_image` so we don't have to install docker-py
 - name: Pull image {{ container_image }}
@@ -21,6 +22,7 @@
     owner: root
     group: root
     mode: '0644'
+  notify: restart container {{ container_name }}
 
 - name: Enable and start {{ container_name }}
   systemd:
@@ -29,3 +31,4 @@
     enabled: "{{ service_enabled }}"
     masked: "{{ service_masked }}"
     state: "{{ service_state }}"
+  register: enable_and_start
