@@ -9,9 +9,10 @@
   when: container_env is defined
   notify: restart container {{ container_name }}
 
-# use `command` instead of `docker_image` so we don't have to install docker-py
 - name: Pull image {{ container_image }}
-  command: docker pull {{ container_image }}
+  docker_image:
+    name: '{{ container_image }}'
+    force: true
   when: container_docker_pull
 
 # TODO: Add handler to restart service after new image has been pulled
