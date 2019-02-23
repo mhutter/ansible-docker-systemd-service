@@ -9,3 +9,5 @@ docker_path: '/usr/bin/docker'
 service_enabled: true
 service_masked: false
 service_state: started
+template_env_path: 'env.j2'
+template_unit_path: 'unit.j2'
