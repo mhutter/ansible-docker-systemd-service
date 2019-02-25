@@ -1,7 +1,7 @@
 ---
 - name: Create ENV file for {{ container_name }}_container.service
   template:
-    src: env.j2
+    src: "{{ template_env_path }}"
     dest: "{{ sysconf_dir }}/{{ container_name }}"
     owner: root
     group: root
@@ -18,7 +18,7 @@
 # TODO: Add handler to restart service after new image has been pulled
 - name: Create unit {{ container_name }}_container.service
   template:
-    src: unit.j2
+    src: "{{ template_unit_path }}"
     dest: /etc/systemd/system/{{ container_name }}_container.service
     owner: root
     group: root
