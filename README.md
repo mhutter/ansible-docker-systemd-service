@@ -55,6 +55,10 @@ This will create:
 
 ## Installation
 
+This role requires the [docker python module](https://pypi.org/project/docker/).
+Install it with `pip3 install docker` or `apt install python3-docker`
+(or drop the `3` for python 2.x).
+
 Put this in your `requirements.yml`:
 
 ```yml
