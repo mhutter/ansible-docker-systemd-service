@@ -1,11 +1,11 @@
 ---
-container_name: "{{ name }}"
+container_name: '{{ name }}'
 container_docker_pull: true
 container_labels: []
 container_links: []
 container_ports: []
 container_volumes: []
-docker_path: "/usr/bin/docker"
+docker_path: '/usr/bin/docker'
 service_enabled: true
 service_masked: false
 service_state: started
