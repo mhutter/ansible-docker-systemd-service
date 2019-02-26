@@ -12,7 +12,7 @@ Requires=docker.service
 EnvironmentFile={{ sysconf_dir }}/{{ container_name }}
 {% endif %}
 ExecStartPre=-{{ docker_path }} rm -f {{ container_name }}
-ExecStart={{ docker_path }} run --name {{ container_name }} --rm {% if container_env is true %}--env-file {{ sysconf_dir }}/{{ container_name }} {% endif %}{{ params('v', container_volumes) }}{% if host_network is true %} --network host {% else %}{{ params('p', container_ports) }}{% endif %}{{ params('-link', container_links) }}{{ params('l', container_labels) }}{{ container_args | default('') |trim }} {{ container_image }} {{ container_cmd | default('') | trim }}
+ExecStart={{ docker_path }} run --name {{ container_name }} --rm {% if container_env is defined %}--env-file {{ sysconf_dir }}/{{ container_name }} {% endif %}{{ params('v', container_volumes) }}{% if host_network is true %} --network host {% else %}{{ params('p', container_ports) }}{% endif %}{{ params('-link', container_links) }}{{ params('l', container_labels) }}{{ container_args | default('') |trim }} {{ container_image }} {{ container_cmd | default('') | trim }}
 ExecStop=/usr/bin/docker stop {{ container_name }}
 
 SyslogIdentifier={{ container_name }}
