@@ -41,6 +41,7 @@ This will create:
   image name)
 * `container_env` - key/value pairs of ENV vars that need to be present
 * `container_volumes` (default: _[]_) - List of `-v` arguments
+* `container_host_network` (default: _false_) - Whether the host network should be used
 * `container_ports` (default: _[]_) - List of `-p` arguments
 * `container_link` (default: _[]_) - List of `--link` arguments
 * `container_labels` (default: _[]_) - List of `-l` arguments
@@ -56,6 +57,10 @@ This will create:
   `absent` to remove the service.
 
 ## Installation
+
+This role requires the [docker python module](https://pypi.org/project/docker/).
+Install it with `pip3 install docker` or `apt install python3-docker`
+(or drop the `3` for python 2.x).
 
 Put this in your `requirements.yml`:
 
