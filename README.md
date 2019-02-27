@@ -45,6 +45,8 @@ This will create:
 * `container_link` (default: _[]_) - List of `--link` arguments
 * `container_labels` (default: _[]_) - List of `-l` arguments
 * `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
+* `container_cap_add` (default _[]_) - List of capabilities to add
+* `container_cap_drop` (default _{}_) - List of capabilities to drop
 
 #### Systemd service specifics
 
