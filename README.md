@@ -41,6 +41,7 @@ This will create:
   image name)
 * `container_env` - key/value pairs of ENV vars that need to be present
 * `container_volumes` (default: _[]_) - List of `-v` arguments
+* `container_host_network` (default: _false_) - Whether the host network should be used
 * `container_ports` (default: _[]_) - List of `-p` arguments
 * `container_link` (default: _[]_) - List of `--link` arguments
 * `container_labels` (default: _[]_) - List of `-l` arguments
