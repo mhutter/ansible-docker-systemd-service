@@ -6,6 +6,8 @@ container_host_network: false
 container_links: []
 container_ports: []
 container_volumes: []
+container_cap_add: []
+container_cap_drop: []
 docker_path: "/usr/bin/docker"
 service_enabled: true
 service_masked: false
