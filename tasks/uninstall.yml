@@ -1,18 +1,18 @@
 ---
-- name: Remove ENV file for {{ container_name }}_container.service
+- name: Remove ENV file for {{ service_name }}.service
   file:
     path: "{{ sysconf_dir }}/{{ container_name }}"
     state: absent
 
 - name: Disable and stop {{ container_name }}
   systemd:
-    name: '{{ container_name }}_container.service'
+    name: '{{ service_name }}.service'
     enabled: false
     state: stopped
 
-- name: Remove unit {{ container_name }}_container.service
+- name: Remove unit {{ service_name }}.service
   file:
-    path: /etc/systemd/system/{{ container_name }}_container.service
+    path: /etc/systemd/system/{{ service_name }}.service
     state: absent
 
 - name: Reload systemd units

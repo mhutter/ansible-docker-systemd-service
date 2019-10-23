@@ -9,6 +9,7 @@ container_volumes: []
 container_cap_add: []
 container_cap_drop: []
 docker_path: "/usr/bin/docker"
+service_name: "{{ container_name }}_container"
 service_enabled: true
 service_masked: false
 service_state: started

@@ -1,7 +1,6 @@
 ---
-
 - name: "restart container {{ container_name }}"
   service:
-    name: '{{ container_name }}_container.service'
+    name: '{{ service_name }}.service'
     state: restarted
   when: service_state != "stopped" and enable_and_start.changed == False

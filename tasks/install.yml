@@ -1,5 +1,5 @@
 ---
-- name: Create ENV file for {{ container_name }}_container.service
+- name: Create ENV file for {{ service_name }}.service
   template:
     src: "{{ template_env_path }}"
     dest: "{{ sysconf_dir }}/{{ container_name }}"
@@ -14,12 +14,12 @@
     name: '{{ container_image }}'
     force: true
   when: container_docker_pull
+  notify: restart container {{ container_name }}
 
-# TODO: Add handler to restart service after new image has been pulled
-- name: Create unit {{ container_name }}_container.service
+- name: Create unit {{ service_name }}.service
   template:
     src: "{{ template_unit_path }}"
-    dest: /etc/systemd/system/{{ container_name }}_container.service
+    dest: /etc/systemd/system/{{ service_name }}.service
     owner: root
     group: root
     mode: '0644'
@@ -27,7 +27,7 @@
 
 - name: Enable and start {{ container_name }}
   systemd:
-    name: '{{ container_name }}_container.service'
+    name: '{{ service_name }}.service'
     daemon_reload: true
     enabled: "{{ service_enabled }}"
     masked: "{{ service_masked }}"
