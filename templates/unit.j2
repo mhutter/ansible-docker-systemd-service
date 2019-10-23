@@ -14,6 +14,9 @@ EnvironmentFile={{ sysconf_dir }}/{{ container_name }}
 ExecStartPre=-{{ docker_path }} rm -f {{ container_name }}
 ExecStart={{ docker_path }} run --name {{ container_name }} --rm {% if container_env is defined %}--env-file {{ sysconf_dir }}/{{ container_name }} {% endif %}{{ params('v', container_volumes) }}{% if container_host_network == true %} --network host {% else %}{{ params('p', container_ports) }}{% endif %}{{ params('-link', container_links) }}{{ params('l', container_labels) }}{{ params('-cap-add', container_cap_add) }}{{ params('-cap-drop', container_cap_drop) }}{{ container_args | default('') |trim }} {{ container_image }} {{ container_cmd | default('') | trim }}
 ExecStop=/usr/bin/docker stop {{ container_name }}
+{% if container_start_post is defined %}
+ExecStartPost=-{{ container_start_post }}
+{% endif %}
 
 SyslogIdentifier={{ container_name }}
 Restart=always
