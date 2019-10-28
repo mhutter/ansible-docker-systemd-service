@@ -8,16 +8,33 @@ PartOf=docker.service
 Requires=docker.service
 
 [Service]
+{% for key, value in service_systemd_options.iteritems() %}
+{{ key }}={{ value }}
+{% endfor %}
 {% if container_env is defined %}
+{% if not 'EnvironmentFile' in service_systemd_options %}
 EnvironmentFile={{ sysconf_dir }}/{{ container_name }}
 {% endif %}
+{% endif %}
+{% if not 'ExecStartPre' in service_systemd_options %}
 ExecStartPre=-{{ docker_path }} rm -f {{ container_name }}
+{% endif %}
+{% if not 'ExecStart' in service_systemd_options %}
 ExecStart={{ docker_path }} run --name {{ container_name }} --rm {% if container_env is defined %}--env-file {{ sysconf_dir }}/{{ container_name }} {% endif %}{{ params('v', container_volumes) }}{% if container_host_network == true %} --network host {% else %}{{ params('p', container_ports) }}{% endif %}{{ params('-link', container_links) }}{{ params('l', container_labels) }}{{ params('-cap-add', container_cap_add) }}{{ params('-cap-drop', container_cap_drop) }}{{ container_args | default('') |trim }} {{ container_image }} {{ container_cmd | default('') | trim }}
+{% endif %}
+{% if not 'ExecStop' in service_systemd_options %}
 ExecStop=/usr/bin/docker stop {{ container_name }}
+{% endif %}
 
+{% if not 'SyslogIdentifier' in service_systemd_options %}
 SyslogIdentifier={{ container_name }}
+{% endif %}
+{% if not 'Restart' in service_systemd_options %}
 Restart=always
+{% endif %}
+{% if not 'RestartSec' in service_systemd_options %}
 RestartSec=10s
+{% endif %}
 
 [Install]
 WantedBy=docker.service
