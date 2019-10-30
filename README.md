@@ -55,7 +55,7 @@ This will create:
 * `enabled` (default: _yes_) - whether the service should be enabled
 * `masked` (default: _no_) - whether the service should be masked
 * `state` (default: _started_) - state the service should be in - set to
-* `absent` to remove the service.
+  `absent` to remove the service.
 * `name` (default: `<container_name>)_container`) - name of the systemd service
 * `systemd_options` (default: {}) - Extra options to include in systemd service file
 
