@@ -24,6 +24,7 @@ ExecStart={{ docker_path }} run --name {{ container_name }} --rm {% if container
 {% endif %}
 {% if not 'ExecStop' in service_systemd_options %}
 ExecStop=/usr/bin/docker stop {{ container_name }}
+{% endif %}
 {% if container_start_post is defined %}
 ExecStartPost=-{{ container_start_post }}
 {% endif %}
