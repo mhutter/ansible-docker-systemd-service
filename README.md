@@ -57,7 +57,7 @@ This will create:
 * `state` (default: _started_) - state the service should be in - set to
   `absent` to remove the service.
 * `name` (default: `<container_name>_container`) - name of the systemd service
-* `systemd_options` (default: {}) - Extra options to include in systemd service file
+* `systemd_options` (default: _[]_) - Extra options to include in systemd service file
 
 ## Installation
 
