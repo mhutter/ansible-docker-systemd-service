@@ -16,5 +16,6 @@
     state: absent
 
 - name: Reload systemd units
-  command: systemctl daemon-reload
+  systemd:
+    daemon_reload: true
   changed_when: false
