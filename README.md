@@ -43,7 +43,7 @@ This will create:
 * `container_volumes` (default: _[]_) - List of `-v` arguments
 * `container_host_network` (default: _false_) - Whether the host network should be used
 * `container_ports` (default: _[]_) - List of `-p` arguments
-* `container_link` (default: _[]_) - List of `--link` arguments
+* `container_links` (default: _[]_) - List of `--link` arguments
 * `container_labels` (default: _[]_) - List of `-l` arguments
 * `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
 * `container_cap_add` (default _[]_) - List of capabilities to add
