@@ -5,6 +5,8 @@ Generic role for creating systemd services to manage docker containers.
 
 ## Example
 
+Example of a Systemd unit for your app "myapp" that links to an already existing container "mysql":
+
 ```yaml
 - name: Start WebApp
   include_role:
@@ -25,7 +27,7 @@ Generic role for creating systemd services to manage docker containers.
 
 This will create:
 
-* A file containing the env vars (either `/etc/sysconfig/mysql` or `/etc/default/mysql`).
+* A file containing the env vars (either `/etc/sysconfig/myapp` or `/etc/default/myapp`).
 * A systemd unit which starts and stops the container. The unit will be called
   `<name>_container.service` to avoid name clashes.
 
