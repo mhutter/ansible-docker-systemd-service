@@ -12,7 +12,8 @@
 - name: Pull image {{ container_image }}
   docker_image:
     name: '{{ container_image }}'
-    force: true
+    force_source: true
+    source: pull
   when: container_docker_pull
   notify: restart container {{ container_name }}
 
