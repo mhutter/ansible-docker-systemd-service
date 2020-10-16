@@ -10,6 +10,7 @@ container_cap_add: []
 container_cap_drop: []
 container_devices: []
 container_privileged: false
+container_args: ""
 docker_path: "/usr/bin/docker"
 service_name: "{{ container_name }}_container"
 service_systemd_options: []
