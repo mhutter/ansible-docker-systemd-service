@@ -5,7 +5,7 @@ galaxy_info:
   description: Create Systemd services for docker containers.
   license: MIT
 
-  min_ansible_version: 2.4
+  min_ansible_version: 2.8
 
   platforms:
     - name: EL
