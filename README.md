@@ -39,8 +39,7 @@ This will create:
 
 * `container_image` (**required**) - Docker image the service uses
 * `container_args` - arbitrary list of arguments to the `docker run` command as a string
-* `container_cmd` - optional command to the container run command (the part after the
-  image name)
+* `container_cmd` (default: _[]_) - optional list of commands to the container run command (the part after the image name)
 * `container_env` - key/value pairs of ENV vars that need to be present
 * `container_volumes` (default: _[]_) - List of `-v` arguments
 * `container_host_network` (default: _false_) - Whether the host network should be used
