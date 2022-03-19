@@ -50,6 +50,7 @@ This will create:
 * `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
 * `container_cap_add` (default _[]_) - List of capabilities to add
 * `container_cap_drop` (default _{}_) - List of capabilities to drop
+* `container_network` (default _""_) - [Network settings](https://docs.docker.com/engine/reference/run/#network-settings)
 * `container_devices` (default _[]_) - List of devices to add
 * `container_privileged` (default _false_) - Whether the container should be privileged
 * `container_start_post` - Optional command to be run by systemd after the container has started
