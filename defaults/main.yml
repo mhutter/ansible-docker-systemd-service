@@ -2,6 +2,7 @@
 container_name: "{{ name }}"
 container_docker_pull: true
 container_labels: []
+container_cmd: []
 container_host_network: false
 container_network: ""
 container_links: []
