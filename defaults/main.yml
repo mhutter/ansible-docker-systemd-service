@@ -1,6 +1,7 @@
 ---
 container_name: "{{ name }}"
 container_docker_pull: true
+container_docker_pull_force_source: true
 container_labels: []
 container_cmd: []
 container_host_network: false

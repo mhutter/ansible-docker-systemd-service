@@ -47,6 +47,7 @@ This will create:
 * `container_links` (default: _[]_) - List of `--link` arguments
 * `container_labels` (default: _[]_) - List of `-l` arguments
 * `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
+* `container_docker_pull_force_source` (default: _yes_) - whether the docker image pull should be executed at every time (see [`docker_image.force_source`](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_image_module.html#parameter-force_source))
 * `container_cap_add` (default _[]_) - List of capabilities to add
 * `container_cap_drop` (default _{}_) - List of capabilities to drop
 * `container_network` (default _""_) - [Network settings](https://docs.docker.com/engine/reference/run/#network-settings)
