@@ -37,6 +37,7 @@ ExecStart={{ docker_path }} run \
   {{ container_args | trim }} \
   {{ container_image }} {% if container_cmd is string %}{{ container_cmd | trim }}{% else %}{{ container_cmd | join(' ') | trim }}{% endif %}
 {% endif %}
+
 {% if not 'ExecStop' in service_systemd_options_keys %}
 ExecStop={{ docker_path }} stop {{ container_name }}
 {% endif %}
