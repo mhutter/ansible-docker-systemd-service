@@ -4,9 +4,9 @@
 {% endmacro %}
 {% set service_systemd_options_keys = service_systemd_options | selectattr("key") | map(attribute="key") | list %}
 [Unit]
-After=docker.service
-PartOf=docker.service
-Requires=docker.service
+{% for key, value in service_systemd_unit_options | dictsort %}
+{{ key }}={{ value }}
+{% endfor %}
 
 [Service]
 {% for item in service_systemd_options %}

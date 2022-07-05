@@ -17,6 +17,10 @@ container_args: ""
 docker_path: "/usr/bin/docker"
 service_name: "{{ container_name }}_container"
 service_systemd_options: []
+service_systemd_unit_options:
+  After: docker.service
+  PartOf: docker.service
+  Requires: docker.service
 service_enabled: true
 service_masked: false
 service_state: started
