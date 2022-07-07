@@ -3,6 +3,7 @@
 
 Generic role for creating systemd services to manage docker containers.
 
+
 ## Example
 
 Example of a Systemd unit for your app "myapp" that links to an already existing container "mysql":
@@ -28,12 +29,13 @@ Example of a Systemd unit for your app "myapp" that links to an already existing
 This will create:
 
 * A file containing the env vars (either `/etc/sysconfig/myapp` or `/etc/default/myapp`).
-* A systemd unit which starts and stops the container. The unit will be called
-  `<name>_container.service` to avoid name clashes.
+* A systemd unit which starts and stops the container. The unit will be called `<name>_container.service` to avoid name clashes.
+
 
 ### Role variables
 
 * `container_name` (**required**) - name of the container
+
 
 #### Docker container specifics
 
@@ -55,24 +57,22 @@ This will create:
 * `container_privileged` (default _false_) - Whether the container should be privileged
 * `container_start_post` - Optional command to be run by systemd after the container has started
 
+
 #### Systemd service specifics
 
-**Note**: These options are all prefixed by `service_`.
-
-* `enabled` (default: _yes_) - whether the service should be enabled
-* `masked` (default: _no_) - whether the service should be masked
-* `state` (default: _started_) - state the service should be in - set to
+* `service_enabled` (default: _yes_) - whether the service should be enabled
+* `service_masked` (default: _no_) - whether the service should be masked
+* `service_state` (default: _started_) - state the service should be in - set to
   `absent` to remove the service.
-* `restart` (default: _yes_) - whether the service should be restarted on changes
-* `name` (default: `<container_name>_container`) - name of the systemd service
-* `systemd_options` (default: _[]_) - Extra options to include in systemd service file
-* `systemd_unit_options`: (default `{"After": "docker.service", "PartOf": "docker.service", "Requires": "docker.service"}`), key/value defining the content of the `[Unit]` service section.
+* `service_restart` (default: _yes_) - whether the service should be restarted on changes
+* `service_name` (default: `<container_name>_container`) - name of the systemd service
+* `service_systemd_options` (default: _[]_) - Extra options to include in systemd service file
+* `service_systemd_unit_options`: (default `{"After": "docker.service", "PartOf": "docker.service", "Requires": "docker.service"}`), key/value defining the content of the `[Unit]` service section.
+
 
 ## Installation
 
-This role requires the [docker python module](https://pypi.org/project/docker/).
-Install it with `pip3 install docker` or `apt install python3-docker`
-(or drop the `3` for python 2.x).
+This role requires the [docker python module](https://pypi.org/project/docker/). Install it with `pip3 install docker` or `apt install python3-docker` (or drop the `3` for python 2.x).
 
 Put this in your `requirements.yml`:
 
@@ -85,16 +85,13 @@ and run `ansible-galaxy install -r requirements.yml`.
 
 ## Gotchas
 
-* When the unit or env file is changed, systemd gets reloaded but existing
-  containers are NOT restarted.
-* Make sure to quote values for `container_ports`, `container_volumes` and so
-  on, especially if they contain colons (`:`). Otherwise YAML will interpret
-  them as hashes/maps and ansible will throw up.
+* When the unit or env file is changed, systemd gets reloaded but existing containers are NOT restarted.
+* Make sure to quote values for `container_ports`, `container_volumes` and so on, especially if they contain colons (`:`). Otherwise YAML will interpret them as hashes/maps and ansible will throw up.
+
 
 ## About orchestrating Docker containers using systemd.
 
-The concept behind this is to define `systemd` units for every docker container.
-This has some benefits:
+The concept behind this is to define `systemd` units for every docker container. This has some benefits:
 - `systemd` is a well-known interface
 - all services are controllable via the same tool (`systemctl`)
 - all logs are accessible via the same tool (`journalctl`)
@@ -102,8 +99,7 @@ This has some benefits:
 - startup behaviour can be defined
 - by correctly defining the unit (see below), we can ensure we always have a clean container.
 
-Here is an example `myapp_container.service` unit file (about what's produced
-by above code):
+Here is an example `myapp_container.service` unit file (about what's produced by above code):
 
     [Unit]
     # define dependencies
