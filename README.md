@@ -57,6 +57,8 @@ This will create:
 
 #### Systemd service specifics
 
+**Note**: These options are all prefixed by `service_`.
+
 * `enabled` (default: _yes_) - whether the service should be enabled
 * `masked` (default: _no_) - whether the service should be masked
 * `state` (default: _started_) - state the service should be in - set to
@@ -64,6 +66,7 @@ This will create:
 * `restart` (default: _yes_) - whether the service should be restarted on changes
 * `name` (default: `<container_name>_container`) - name of the systemd service
 * `systemd_options` (default: _[]_) - Extra options to include in systemd service file
+* `systemd_unit_options`: (default `{"After": "docker.service", "PartOf": "docker.service", "Requires": "docker.service"}`), key/value defining the content of the `[Unit]` service section.
 
 ## Installation
 
