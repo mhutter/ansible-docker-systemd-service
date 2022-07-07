@@ -16,6 +16,8 @@ galaxy_info:
         - xenial
         - yakkety
         - zesty
+        - bionic
+        - focal
 
   galaxy_tags:
     - system
