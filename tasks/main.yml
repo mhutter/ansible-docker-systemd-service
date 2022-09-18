@@ -3,7 +3,7 @@
   include_vars: "{{ ansible_os_family }}.yml"
   tags: always
 
-- include: install.yml
+- include_tasks: install.yml
   when: service_state != "absent"
-- include: uninstall.yml
+- include_tasks: uninstall.yml
   when: service_state == "absent"
