@@ -28,6 +28,7 @@ ExecStart={{ docker_path }} run \
   {{ params('--volume', container_volumes) }}\
   {% if container_host_network == true %}--network host {% else %}{{ params('--publish', container_ports) }}{% endif %}\
   {% if container_network %}--network {{ container_network }}{% endif %} \
+  {% if container_user %}--user {{ container_user }}{% endif %} \
   {{ params('--link', container_links) }}\
   {{ params('--label', container_labels) }}\
   {{ params('--cap-add', container_cap_add) }}\
