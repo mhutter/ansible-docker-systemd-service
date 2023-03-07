@@ -13,5 +13,7 @@
           - '/data/uploads:/data/uploads'
         container_ports:
           - '3000:3000'
+        container_hosts:
+          - 'host.docker.internal:host-gateway'
         container_env:
           MYSQL_ROOT_PASSWORD: "very sekr1t"

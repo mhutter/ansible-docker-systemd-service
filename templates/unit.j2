@@ -30,6 +30,7 @@ ExecStart={{ docker_path }} run \
   {% if container_network %}--network {{ container_network }}{% endif %} \
   {% if container_user %}--user {{ container_user }}{% endif %} \
   {{ params('--link', container_links) }}\
+  {{ params('--add-host', container_hosts) }}\
   {{ params('--label', container_labels) }}\
   {{ params('--cap-add', container_cap_add) }}\
   {{ params('--cap-drop', container_cap_drop) }}\

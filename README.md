@@ -20,6 +20,8 @@ Example of a Systemd unit for your app "myapp" that links to an already existing
       - '/data/uploads:/data/uploads'
     container_ports:
       - '3000:3000'
+    container_hosts:
+      - 'host.docker.internal:host-gateway'
     container_env:
       MYSQL_ROOT_PASSWORD: "{{ mysql_root_pw }}"
     container_labels:
@@ -46,6 +48,7 @@ This will create:
 * `container_volumes` (default: _[]_) - List of `-v` arguments
 * `container_host_network` (default: _false_) - Whether the host network should be used
 * `container_ports` (default: _[]_) - List of `-p` arguments
+* `container_hosts` (default: _[]_) - List of `--add-host` arguments
 * `container_links` (default: _[]_) - List of `--link` arguments
 * `container_labels` (default: _[]_) - List of `-l` arguments
 * `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
@@ -87,7 +90,7 @@ and run `ansible-galaxy install -r requirements.yml`.
 ## Gotchas
 
 * When the unit or env file is changed, systemd gets reloaded but existing containers are NOT restarted.
-* Make sure to quote values for `container_ports`, `container_volumes` and so on, especially if they contain colons (`:`). Otherwise YAML will interpret them as hashes/maps and ansible will throw up.
+* Make sure to quote values for `container_ports`, `container_hosts`, `container_volumes` and so on, especially if they contain colons (`:`). Otherwise YAML will interpret them as hashes/maps and ansible will throw up.
 
 
 ## About orchestrating Docker containers using systemd.
