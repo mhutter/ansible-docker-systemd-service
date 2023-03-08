@@ -7,6 +7,7 @@ container_cmd: []
 container_host_network: false
 container_network: ""
 container_user: ""
+container_hostname: ""
 container_links: []
 container_ports: []
 container_volumes: []
