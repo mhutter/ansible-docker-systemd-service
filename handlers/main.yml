@@ -1,5 +1,5 @@
 ---
-- name: "restart container {{ container_name }}"
+- name: "restart container"
   service:
     name: '{{ service_name }}.service'
     state: restarted
