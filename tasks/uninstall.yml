@@ -1,14 +1,14 @@
 ---
-- name: Remove ENV file for {{ service_name }}.service
-  file:
-    path: "{{ sysconf_dir }}/{{ container_name }}"
-    state: absent
-
 - name: Disable and stop {{ container_name }}
   systemd:
     name: '{{ service_name }}.service'
     enabled: false
     state: stopped
+
+- name: Remove ENV file for {{ service_name }}.service
+  file:
+    path: "{{ sysconf_dir }}/{{ container_name }}"
+    state: absent
 
 - name: Remove unit {{ service_name }}.service
   file:
