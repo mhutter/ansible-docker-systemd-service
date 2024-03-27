@@ -7,7 +7,7 @@
     group: root
     mode: '0600'
   when: container_env is defined
-  notify: restart container {{ container_name }}
+  notify: restart container
 
 - name: Pull image {{ container_image }}
   docker_image:
@@ -15,7 +15,7 @@
     force_source: '{{ container_docker_pull_force_source | bool }}'
     source: pull
   when: container_docker_pull
-  notify: restart container {{ container_name }}
+  notify: restart container
 
 - name: Create unit {{ service_name }}.service
   template:
@@ -24,7 +24,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify: restart container {{ container_name }}
+  notify: restart container
 
 - name: Enable and start {{ container_name }}
   systemd:
