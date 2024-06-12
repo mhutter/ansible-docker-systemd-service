@@ -10,7 +10,7 @@
   notify: restart container {{ container_name }}
 
 - name: Pull image {{ container_image }}
-  docker_image:
+  community.docker.docker_image:
     name: '{{ container_image }}'
     force_source: '{{ container_docker_pull_force_source | bool }}'
     source: pull
