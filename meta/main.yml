@@ -1,8 +1,8 @@
 ---
 galaxy_info:
-  name: docker_systemd_service
-  author: Manuel Hutter
+  role_name: docker_systemd_service
   description: Create Systemd services for docker containers.
+  author: Manuel Hutter
   license: MIT
 
   min_ansible_version: 2.8
