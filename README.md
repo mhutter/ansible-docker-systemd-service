@@ -1,8 +1,6 @@
 # Docker role `mhutter.docker-systemd-service`
-[![Build Status](https://travis-ci.com/mhutter/ansible-docker-systemd-service.svg?branch=master)](https://travis-ci.com/mhutter/ansible-docker-systemd-service)
 
 Generic role for creating systemd services to manage docker containers.
-
 
 ## Example
 
@@ -15,65 +13,61 @@ Example of a Systemd unit for your app "myapp" that links to an already existing
   vars:
     container_name: myapp
     container_image: myapp:latest
-    container_links: [ 'mysql' ]
+    container_links: ["mysql"]
     container_volumes:
-      - '/data/uploads:/data/uploads'
+      - "/data/uploads:/data/uploads"
     container_ports:
-      - '3000:3000'
+      - "3000:3000"
     container_hosts:
-      - 'host.docker.internal:host-gateway'
+      - "host.docker.internal:host-gateway"
     container_env:
       MYSQL_ROOT_PASSWORD: "{{ mysql_root_pw }}"
     container_labels:
-      - 'traefik.enable=true'
+      - "traefik.enable=true"
 ```
 
 This will create:
 
-* A file containing the env vars (either `/etc/sysconfig/myapp` or `/etc/default/myapp`).
-* A systemd unit which starts and stops the container. The unit will be called `<name>_container.service` to avoid name clashes.
-
+- A file containing the env vars (either `/etc/sysconfig/myapp` or `/etc/default/myapp`).
+- A systemd unit which starts and stops the container. The unit will be called `<name>_container.service` to avoid name clashes.
 
 ### Role variables
 
-* `container_name` (**required**) - name of the container
-
+- `container_name` (**required**) - name of the container
 
 #### Docker container specifics
 
-* `container_image` (**required**) - Docker image the service uses
-* `container_args` - arbitrary list of arguments to the `docker run` command as a string
-* `container_cmd` (default: _[]_) - optional list of commands to the container run command (the part after the image name)
-* `container_env` - key/value pairs of ENV vars that need to be present
-* `container_volumes` (default: _[]_) - List of `-v` arguments
-* `container_host_network` (default: _false_) - Whether the host network should be used
-* `container_ports` (default: _[]_) - List of `-p` arguments
-* `container_hosts` (default: _[]_) - List of `--add-host` arguments
-* `container_links` (default: _[]_) - List of `--link` arguments
-* `container_labels` (default: _[]_) - List of `-l` arguments
-* `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
-* `container_docker_pull_force_source` (default: _yes_) - whether the docker image pull should be executed at every time (see [`docker_image.force_source`](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_image_module.html#parameter-force_source))
-* `container_cap_add` (default _[]_) - List of capabilities to add
-* `container_cap_drop` (default _{}_) - List of capabilities to drop
-* `container_network` (default _""_) - [Network settings](https://docs.docker.com/engine/reference/run/#network-settings)
-* `container_user` (default _""_) - [User settings](https://docs.docker.com/engine/reference/run/#user)
-* `container_hostname` (default _""_) - Container host name: `--hostname` flag
-* `container_devices` (default _[]_) - List of devices to add
-* `container_privileged` (default _false_) - Whether the container should be privileged
-* `container_start_post` - Optional command to be run by systemd after the container has started
-
+- `container_image` (**required**) - Docker image the service uses
+- `container_args` - arbitrary list of arguments to the `docker run` command as a string
+- `container_cmd` (default: _[]_) - optional list of commands to the container run command (the part after the image name)
+- `container_env` - key/value pairs of ENV vars that need to be present
+- `container_volumes` (default: _[]_) - List of `-v` arguments
+- `container_host_network` (default: _false_) - Whether the host network should be used
+- `container_ports` (default: _[]_) - List of `-p` arguments
+- `container_hosts` (default: _[]_) - List of `--add-host` arguments
+- `container_links` (default: _[]_) - List of `--link` arguments
+- `container_labels` (default: _[]_) - List of `-l` arguments
+- `container_docker_pull` (default: _yes_) - whether the docker image should be pulled
+- `container_docker_pull_force_source` (default: _yes_) - whether the docker image pull should be executed at every time (see [`docker_image.force_source`](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_image_module.html#parameter-force_source))
+- `container_cap_add` (default _[]_) - List of capabilities to add
+- `container_cap_drop` (default _{}_) - List of capabilities to drop
+- `container_network` (default _""_) - [Network settings](https://docs.docker.com/engine/reference/run/#network-settings)
+- `container_user` (default _""_) - [User settings](https://docs.docker.com/engine/reference/run/#user)
+- `container_hostname` (default _""_) - Container host name: `--hostname` flag
+- `container_devices` (default _[]_) - List of devices to add
+- `container_privileged` (default _false_) - Whether the container should be privileged
+- `container_start_post` - Optional command to be run by systemd after the container has started
 
 #### Systemd service specifics
 
-* `service_enabled` (default: _yes_) - whether the service should be enabled
-* `service_masked` (default: _no_) - whether the service should be masked
-* `service_state` (default: _started_) - state the service should be in - set to
+- `service_enabled` (default: _yes_) - whether the service should be enabled
+- `service_masked` (default: _no_) - whether the service should be masked
+- `service_state` (default: _started_) - state the service should be in - set to
   `absent` to remove the service.
-* `service_restart` (default: _yes_) - whether the service should be restarted on changes
-* `service_name` (default: `<container_name>_container`) - name of the systemd service
-* `service_systemd_options` (default: _[]_) - Extra options to include in systemd service file
-* `service_systemd_unit_options`: (default `{"After": "docker.service", "PartOf": "docker.service", "Requires": "docker.service"}`), key/value defining the content of the `[Unit]` service section.
-
+- `service_restart` (default: _yes_) - whether the service should be restarted on changes
+- `service_name` (default: `<container_name>_container`) - name of the systemd service
+- `service_systemd_options` (default: _[]_) - Extra options to include in systemd service file
+- `service_systemd_unit_options`: (default `{"After": "docker.service", "PartOf": "docker.service", "Requires": "docker.service"}`), key/value defining the content of the `[Unit]` service section.
 
 ## Installation
 
@@ -87,16 +81,15 @@ Put this in your `requirements.yml`:
 
 and run `ansible-galaxy install -r requirements.yml`.
 
-
 ## Gotchas
 
-* When the unit or env file is changed, systemd gets reloaded but existing containers are NOT restarted.
-* Make sure to quote values for `container_ports`, `container_hosts`, `container_volumes` and so on, especially if they contain colons (`:`). Otherwise YAML will interpret them as hashes/maps and ansible will throw up.
-
+- When the unit or env file is changed, systemd gets reloaded but existing containers are NOT restarted.
+- Make sure to quote values for `container_ports`, `container_hosts`, `container_volumes` and so on, especially if they contain colons (`:`). Otherwise YAML will interpret them as hashes/maps and ansible will throw up.
 
 ## About orchestrating Docker containers using systemd.
 
 The concept behind this is to define `systemd` units for every docker container. This has some benefits:
+
 - `systemd` is a well-known interface
 - all services are controllable via the same tool (`systemctl`)
 - all logs are accessible via the same tool (`journalctl`)
