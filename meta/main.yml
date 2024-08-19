@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: docker_systemd_service
+  role_name: docker-systemd-service
   description: Create Systemd services for docker containers.
   author: Manuel Hutter
   license: MIT
