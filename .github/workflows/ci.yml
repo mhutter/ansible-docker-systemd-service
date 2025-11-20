@@ -13,13 +13,13 @@ jobs:
   yamllint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: yamllint .
 
   ansible-syntax:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Prepare Ansible config for tests
         run: printf '[defaults]\nroles_path=../' > ansible.cfg
       - name: Ansible syntax check
